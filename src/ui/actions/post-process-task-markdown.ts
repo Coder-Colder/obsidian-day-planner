@@ -27,6 +27,22 @@ export function decorate(
       }),
     );
   }
+  // @ts-expect-error
+  else if (settings.showTimestampInTaskBlock && task.startMinutes) {
+    const timestamp = createTimestamp(
+      // @ts-expect-error
+      task.startMinutes,
+      task.durationMinutes,
+      settings.timestampFormat,
+    );
+    const para = el.querySelector("p");
+    para.before(
+      createSpan({
+        text: timestamp,
+        cls: "day-planner-task-decoration",
+      }),
+    );
+  }
 }
 
 export function disableCheckBoxes(el: HTMLElement) {
